@@ -29,26 +29,33 @@ error() {
 }
 
 
-colorme
 
 
-for opt in "$@"; do
-  case $opt in
+main() {
 
-    --help)
-      help
-      ;;
-
-    *)
-      error "unknown option: $opt"
-      help
-      exit 1
-      ;;
-
-  esac
-done
+  colorme
 
 
+  for opt in "$@"; do
+    case $opt in
+
+      --help)
+        help
+        ;;
+
+      *)
+        error "unknown option: $opt"
+        help
+        exit 1
+        ;;
+
+    esac
+  done
+
+}
+
+
+main
 
 
 
