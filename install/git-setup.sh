@@ -9,11 +9,11 @@ else
   echo "Status: ssh-agent is running."
 fi
 
-# echo "Setting up GitHub SSH key pairs."
+echo "Setting up GitHub SSH key pairs."
 
-# echo "Please enter your github email:"
-# read github_email
-# ssh-keygen -t rsa -b 4096 -C $github_email
+echo "Please enter your github email:"
+read github_email
+ssh-keygen -t rsa -b 4096 -C $github_email
 
 echo "Starting ssh-agent in the background."
 eval "$(ssh-agent -s)"
@@ -24,6 +24,7 @@ ssh-add
 echo "Add key to GitHub to finish setup."
 
 cat $HOME/.ssh/id_rsa.pub
+
 # eval $(ssh-agent -k) # kill the process
 
 
