@@ -17,16 +17,22 @@ cmd 'packadd packer.nvim'              -- load the package manager
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
+  -- use 'sheerun/vim-polyglot'        -- language pack
 	use 'machakann/vim-sandwich'
 	use 'jiangmiao/auto-pairs'
-  use 'ap/vim-css-color'
-  use 'sheerun/vim-polyglot'           -- language pack
+  use 'norcalli/nvim-colorizer.lua'    -- color highlighter
   use 'matze/vim-move'                 -- move code blocks
   use 'vim-airline/vim-airline'
   use 'machakann/vim-highlightedyank'
   use 'mattn/emmet-vim'
   use 'tpope/vim-commentary'           -- commenting
   use 'sbdchd/neoformat'               -- code formatting
+  use 'inside/vim-search-pulse'        -- locate cursor after search
+  use 'RRethy/vim-illuminate'          -- auto highlights other uses of the cursor word
+  use {                                -- indentation guides
+    'lukas-reineke/indent-blankline.nvim',
+    branch = 'lua' 
+  }
 
   -- filesystem and navigation
   use 'preservim/nerdtree'
@@ -37,10 +43,11 @@ require('packer').startup(function()
   use 'jremmen/vim-ripgrep'
   use 'jistr/vim-nerdtree-tabs'
   use 'szw/vim-maximizer'
-  use { 'nvim-telescope/telescope.nvim',
+  use {
+    'nvim-telescope/telescope.nvim',
     requires = {
-      { 'nvim-lua/popup.nvim' },
-      { 'nvim-lua/plenary.nvim' }
+      {'nvim-lua/popup.nvim'},
+      {'nvim-lua/plenary.nvim'}
     }
   }
 
@@ -48,18 +55,14 @@ require('packer').startup(function()
   use '907th/vim-auto-save'
 
   -- development
-  use { 'neoclide/coc.nvim', branch = 'release' }
-  use { 'lewis6991/gitsigns.nvim',
-    requires = { 'nvim-lua/plenary.nvim' }
-  }
-  use 'f-person/git-blame.nvim'
+  use { 'AndrewRadev/splitjoin.vim' }
+  use { 'lewis6991/gitsigns.nvim' }
 
   -- color schemes
   use 'NLKNguyen/papercolor-theme'
 
 end)
 
-require('plugins')
 
 ---- OPTIONS ----
 
@@ -98,18 +101,20 @@ map('', '<S-e>', '<c-e>')
 map('', '<S-y>', '<c-y>')
 
 -- filesystem and navigation
-map('', '<C-M-p>', '<cmd>lua require(\'telescope.builtin\').find_files()<CR>')
-map('', '<C-M-f>', '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>')
-map('', '<C-M-b>', '<cmd>lua require(\'telescope.builtin\').file_browser()<CR>')
-map('n', '<C-M-e>', ':NERDTreeTabsToggle<CR>')
+map('n', '<C-M-p>', '<cmd>lua require(\'telescope.builtin\').find_files()<CR>')
+map('n', '<C-M-f>', '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>')
+map('n', '<C-M-b>', '<cmd>lua require(\'telescope.builtin\').file_browser()<CR>')
+map('n', '<C-M-e>', ':NERDTreeTabsToggle<CR>', { silent = true })
 
 -- code formatting
-map('n', '<M-S-f>', ':Format<CR>')
+-- TODO: mapping for code formatting
 
 -- tabs and splits
 map('n', '<C-S-Left', 'gT')
 map('n', '<C-S-Right', 'gt')
 
 
+---- LOAD PLUGIN CONFIGS ----
+require('plugins')
 
 
