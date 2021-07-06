@@ -1,5 +1,5 @@
 <h1 align="center">⚬●⚬ Dotfiles v3.0 ⚬●⚬</h1>
-<p align="center">My personal dotfiles configurations for neovim 0.5.0</p>
+<p align="center">My own personal dotfiles configurations for Neovim 0.5.0</p>
 
 # 📦 Installation
 ```bash
