@@ -1,4 +1,6 @@
 
+-- TODO: add providers for LSP and update colors
+
 local gl = require'galaxyline'
 local condition = require'galaxyline.condition'
 local colors = require'themes/onedark'

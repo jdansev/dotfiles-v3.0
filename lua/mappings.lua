@@ -1,49 +1,70 @@
 
+local map = require'utils/general'.map
 
-local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true }
-  if opts then
-    options = vim.tbl_extend('force', options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
+-- save current buffer
+map('n', '<C-s>', '<cmd>w | echo "Buffer saved."<CR>', { silent = true })
 
+-- dotfiles search
+map('n', '<leader>config', '<cmd>lua require\'utils/telescope\'.search_dotfiles()<CR>', { silent = true })
 
----- KEY MAPPINGS ----
+-- reload neovim
+map('n', '<leader><leader>', '<cmd>wa | so $MYVIMRC | echo "Reloaded" $MYVIMRC<CR>', { silent = true })
 
--- jk is escape
+-- remap normal mode escape
 map('i', 'jk', '<ESC>')
+map('i', 'kj', '<ESC>')
+map('i', 'jj', '<ESC>')
 
 -- move vertically by visual line
 map('n', 'j', 'gj')
 map('n', 'k', 'gk')
 
 -- view scrolling
-map('', '<S-d>', '<C-d>')
-map('', '<S-u>', '<C-u>')
-map('', '<S-e>', '<C-e>')
-map('', '<S-y>', '<C-y>')
+map('', '<S-d>', '<C-d>', { silent = true })
+map('', '<S-u>', '<C-u>', { silent = true })
+map('', '<S-e>', '<C-e>', { silent = true })
+map('', '<S-y>', '<C-y>', { silent = true })
 
--- filesystem navigation
-map('n', '<C-M-p>', '<CMD>lua require(\'telescope.builtin\').find_files()<CR>')
-map('n', '<C-M-f>', '<CMD>lua require(\'telescope.builtin\').live_grep()<CR>')
-map('n', '<C-M-b>', '<CMD>lua require(\'telescope.builtin\').file_browser()<CR>')
-map('n', '<C-M-e>', '<CMD>NERDTreeTabsToggle<CR>', { silent = true })
+-- resize splits with arrows
+map('n', '<C-Up>', ':resize +2<CR>', { silent = true })
+map('n', '<C-Down>', ':resize -2<CR>', { silent = true })
+map('n', '<C-Left>', ':vertical resize -2<CR>', { silent = true })
+map('n', '<C-Right>', ':vertical resize +2<CR>', { silent = true })
 
--- tabs and splits
-map('n', '<C-S-Left', 'gT')
-map('n', '<C-S-Right', 'gt')
+-- better indenting
+map('v', '<', '<gv', { noremap = true, silent = true })
+map('v', '>', '>gv', { noremap = true, silent = true })
 
+-- toggle invisibles
+map('n', '<C-i>', ':set list!<cr>', { silent = true, noremap = true })
+
+-- Telescope
+map('n', '<C-f>', '<cmd>lua require(\'telescope.builtin\').current_buffer_fuzzy_find()<CR>')
+map('n', '<C-p>', '<cmd>lua require(\'telescope.builtin\').find_files()<CR>')
+map('n', '<C-o>', '<cmd>lua require(\'telescope.builtin\').oldfiles()<CR>')
+map('n', '<C-M-f>', '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>')
+map('n', '<C-M-b>', '<cmd>lua require(\'telescope.builtin\').file_browser()<CR>')
+
+-- barbar
+map('n', '<C-w>', '<cmd>BufferClose<CR>', { silent = true })
+map('n', '<C-S-Left>', '<cmd>BufferPrevious<CR>', { silent = true })
+map('n', '<C-S-Right>', '<cmd>BufferNext<CR>', { silent = true })
+
+-- nvim-tree
+map('n', '<C-e>', '<cmd>NvimTreeToggle<CR>', { silent = true })
+
+-- barbar
+map('n', '<Tab>', ':BufferNext<CR>', { noremap = true, silent = true })
+map('n', '<S-Tab>', ':BufferPrevious<CR>', { noremap = true, silent = true })
+map('n', '<S-x>', ':BufferClose<CR>', { noremap = true, silent = true })
+
+-- completion (nvim-compe/coc.nvim with nvim-autopairs)
+map('i', '<Tab>', 'v:lua.tab()', { expr = true, noremap = true })
+map('i', '<S-Tab>', 'v:lua.s_tab()', { expr = true, noremap = true })
+map('i' , '<CR>','v:lua.completion_confirm()', { expr = true , noremap = true })
+
+-- TODO: mappings for jump and show diagnosticTs
+-- TODO: mappings for float terminal
 -- TODO: mappings for code formatting
-map('n', '<C-i>', ':set list!<CR>', { silent = true })
-
-
--- CoC
-CocFns = require'utils/coc'
-
-map('i', '<TAB>', 'v:lua.CocFns.tab_completion()', { expr = true })
-map('i', '<S-TAB>', 'v:lua.CocFns.shift_tab_completion()', { expr = true })
-map('i', '<CR>', 'v:lua.CocFns.autoselect_first_completion()', { expr = true })
-map('n', 'K', ':lua CocFns.show_documentation()<CR>', { silent = true })
 
 

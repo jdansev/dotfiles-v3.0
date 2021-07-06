@@ -1,48 +1,34 @@
+
+local npairs = require'nvim-autopairs'
+local utils = require'utils/general'
 local M = {}
-local utils = require('utils/general')
-local fn = vim.fn
-local bo = vim.bo
 
 
-function M.tab_completion()
-  if fn.pumvisible() > 0 then
-    return utils.esc('<C-n>')
+function M.tab()
+  if vim.fn.pumvisible() == 1 then
+    return utils.esc'<C-n>'
+  elseif utils.check_back_space() then
+    return utils.esc'<Tab>'
+  elseif utils.check_back_space() then
+    return utils.esc'<Tab>'
   else
-    if M.check_back_space() then
-      return utils.esc('<TAB>')
-    else
-      fn['coc#refresh']()
-    end
+    return vim.fn['coc#refresh()']()
   end
 end
 
-function M.shift_tab_completion()
-  if fn.pumvisible() > 0 then
-    return utils.esc('<C-p>')
+function M.s_tab()
+  if vim.fn.pumvisible() == 1 then
+    return utils.esc'<C-p>'
   else
-    return utils.esc('<C-h>')
+    return utils.esc'<C-h>'
   end
 end
 
-function M.autoselect_first_completion()
-  if fn.pumvisible() > 0 then
-    return fn['coc#_select_confirm']()
+function M.completion_confirm()
+  if vim.fn.pumvisible() == 1 then
+    return vim.fn['coc#_select_confirm']()
   else
-    return utils.esc('<CR>')
-  end
-end
-
-function M.check_back_space()
-  local col = fn.col('.') - 1
-  return col <= 0 or fn.getline('.'):sub(col, col):match('%s')
-end
-
-function M.show_documentation()
-  local filetype = vim.bo.filetype
-  if filetype == 'vim'  or filetype == 'help' then
-    vim.api.nvim_command('h ' .. filetype)
-  elseif vim.call('coc#rpc#ready') then
-    fn.CocActionAsync('doHover')
+    return npairs.autopairs_cr()
   end
 end
 

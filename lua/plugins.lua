@@ -4,36 +4,28 @@ local cmd = vim.cmd
 
 
 -- Plugins
-cmd 'packadd packer.nvim'              -- load the package manager
+cmd 'packadd packer.nvim'
 
-require'packer'.startup(function()
+require'packer'.startup(function(use)
   use 'wbthomason/packer.nvim'
 
+  use 'kyazdani42/nvim-web-devicons'
+  use 'windwp/nvim-autopairs'
   use 'machakann/vim-sandwich'
-  use 'jiangmiao/auto-pairs'
-  use 'norcalli/nvim-colorizer.lua'    -- color highlighter
-  use 'matze/vim-move'                 -- move code blocks
-  use 'vim-airline/vim-airline'
   use 'machakann/vim-highlightedyank'
-  use 'mattn/emmet-vim'
-  use 'tpope/vim-commentary'           -- commenting. TODO: find a newer plugin
-  use 'sbdchd/neoformat'               -- code formatting
-  use 'inside/vim-search-pulse'        -- locate cursor after search
-  use 'RRethy/vim-illuminate'          -- auto highlights other uses of the cursor word
-  use 'glepnir/galaxyline.nvim'
-  use {                                -- indentation guides
-    'lukas-reineke/indent-blankline.nvim',
-    branch = 'lua' 
-  }
+  use 'matze/vim-move'                      -- move code blocks
+  use 'norcalli/nvim-colorizer.lua'         -- color highlighter
+  use 'inside/vim-search-pulse'             -- locate cursor after search
+  use 'RRethy/vim-illuminate'               -- auto highlights other uses of the cursor word
+  use 'glepnir/galaxyline.nvim'             -- status line
 
   -- filesystem and navigation
-  use 'preservim/nerdtree'
-  use 'ryanoasis/vim-devicons'
-  use 'tiagofumo/vim-nerdtree-syntax-highlight'
-  use 'christoomey/vim-tmux-navigator'
+  use 'romgrk/barbar.nvim'
   use 'junegunn/fzf.vim'
   use 'jremmen/vim-ripgrep'
-  use 'jistr/vim-nerdtree-tabs'
+  use 'kyazdani42/nvim-tree.lua'
+
+  use 'christoomey/vim-tmux-navigator'
   use 'szw/vim-maximizer'
   use {
     'nvim-telescope/telescope.nvim',
@@ -43,57 +35,69 @@ require'packer'.startup(function()
     }
   }
 
-
   -- development
-  use '907th/vim-auto-save'
-  use 'AndrewRadev/splitjoin.vim' 
-  use 'lewis6991/gitsigns.nvim' 
+  use 'Pocco81/TrueZen.nvim'
+  use 'f-person/git-blame.nvim'
+  use 'tpope/vim-commentary'
+
+  -- TODO: update with AutoSave.nvim
+  use 'Pocco81/AutoSave.nvim'
+
+  use 'AndrewRadev/splitjoin.vim'
   use 'nvim-treesitter/nvim-treesitter'
-  use 'nvim-treesitter/playground'    -- :TSPlaygroundToggle, :TSHighlightCapturesUnderCursor
+  use 'hrsh7th/vim-vsnip'
+  use 'hrsh7th/vim-vsnip-integ'
+  use 'mattn/emmet-vim'                       -- frontend completion
+  use 'nvim-treesitter/playground'            -- :TSPlaygroundToggle, :TSHighlightCapturesUnderCursor
+  use  'lukas-reineke/indent-blankline.nvim'  -- indentation guides
+
   use {
     'neoclide/coc.nvim',
-    branch = 'release'
+    branch = 'release',
+    cond = function()
+      return COMPLETION_ENGINE == 'coc'
+    end
   }
 
   -- color schemes
   use 'NLKNguyen/papercolor-theme'
 
-  -- color schemes (with treesitter support)
+  -- dashboard
+  use 'glepnir/dashboard-nvim'
+
+  -- treesitter support
   use 'sainnhe/sonokai'
   use 'sainnhe/everforest'
   use 'mhartington/oceanic-next'
 
-  -- other
+  -- dotfile utilities
   use 'tjdevries/astronauta.nvim'
+
+  -- lsp
+  use 'neovim/nvim-lspconfig'
+  use 'kabouzeid/nvim-lspinstall'
+  use 'hrsh7th/nvim-compe'
+  use 'glepnir/lspsaga.nvim'
+  use 'kosayoda/nvim-lightbulb'
+  use 'onsails/lspkind-nvim'
+
+  -- misc.
+  -- use 'Pocco81/TrueZen.nvim'
+  -- use 'folke/which-key.nvim'
   -- use 'ray-x/navigator.lua'
-  -- use 'hrsh7th/nvim-compe'
-  -- use 'sheerun/vim-polyglot'        -- language pack
+  -- use 'ray-x/lsp_signature.nvim'
+  -- use 'djoshea/vim-autoread'
+  -- use 'folke/zen-mode.nvim'
+  -- use 'jabirali/tmux-tilish'
+
+  -- TODO: install code formatter
+  -- TODO: find newer commenting plugin
+  -- TODO: git integrations
+
 end)
 
 
-
--- telescope
--- TODO: smaller file search window
-require'telescope'.setup({
-  defaults = {
-    color_devicns = true,
-    file_ignore_patterns = {
-      'node_modules/.*',
-      '.git/.*'
-    }
-  }
-})
-
--- gitsigns
-require'gitsigns'.setup()
-
--- colorizer.lua
-require'colorizer'.setup()
-
--- git blame
-g['gitblame_enabled'] = 0
-g['gitblame_message_template'] = '    <author> • <date> • <summary>'
-g['gitblame_date_format'] = '%r'
+-- TODO: move these to plugin-config
 
 -- vim-illuminate
 g['Illuminate_delay'] = 200
