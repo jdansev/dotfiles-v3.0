@@ -11,7 +11,7 @@ sudo curl -sL https://bit.ly/36iiWm5 | bash
 dotfiles --help
 ```
 
-# 📋 TODO's
+# 📋 ToDo's
 **High Priority:**
 ```
 dotfiles install
