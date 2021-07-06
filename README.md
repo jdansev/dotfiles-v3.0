@@ -7,13 +7,13 @@ sudo curl -sL https://bit.ly/36iiWm5 | bash
 ```
 
 # 🤖 Usage (commands)
-```
+```bash
 dotfiles --help
 ```
 
 # 📋 ToDo's
 **High Priority:**
-```
+```bash
 dotfiles install
 dotfiles uninstall
 ```
