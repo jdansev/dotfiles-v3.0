@@ -13,9 +13,14 @@ require'plugin-config/vim-vsnip'
 require'plugin-config/AutoSave'
 require'plugin-config/TrueZen'
 
--- completion
+
 if COMPLETION_ENGINE == 'coc' then
   require'plugin-config/coc'
+
+  local coc_utils = require'utils/coc'
+  _G.tab = coc_utils.tab
+  _G.s_tab = coc_utils.s_tab
+  _G.completion_confirm = coc_utils.completion_confirm
 
 elseif COMPLETION_ENGINE == 'nvim-lsp' then
   require'plugin-config/nvim-compe'
@@ -28,8 +33,10 @@ elseif COMPLETION_ENGINE == 'nvim-lsp' then
   _G.tab = compe_utils.tab
   _G.s_tab = compe_utils.s_tab
   _G.completion_confirm = compe_utils.completion_confirm
+
   require'lsp/mappings'
 end
+
 
 require'mappings'
 require'statusline'
