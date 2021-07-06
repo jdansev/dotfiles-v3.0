@@ -10,15 +10,13 @@ sudo curl -sL https://bit.ly/36iiWm5 | bash
 ```
 dotfiles --help
 ```
-```
-dotfiles install      #TODO
-dotfiles uninstall    #TODO
-```
-
 
 # 📋 TODO's
 **High Priority:**
-- None
+```
+dotfiles install
+dotfiles uninstall
+```
 
 **Low Priority:**
 - None  
