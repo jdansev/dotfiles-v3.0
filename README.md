@@ -3,7 +3,7 @@
 
 ## Install
 ```bash
-curl -sL https://bit.ly/36iiWm5 | bash
+sudo curl -sL https://bit.ly/36iiWm5 | bash
 ```
 
 
