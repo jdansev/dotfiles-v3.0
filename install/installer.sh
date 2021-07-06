@@ -64,13 +64,7 @@ error() {
 }
 
 
-
-
 main() {
-  echo "starting main"
-  colorme
-
-  echo "here"
 
   for opt in "$@"; do
     case $opt in
@@ -92,5 +86,6 @@ main() {
   install_packer
 }
 
-main
+colorme
+main "$@"
 
