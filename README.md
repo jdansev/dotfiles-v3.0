@@ -13,6 +13,7 @@ dotfiles --help
 
 # 📋 ToDo
 **High Priority:**
-- None  
+- None
+
 **Low Priority:**
 - None  
