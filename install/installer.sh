@@ -46,41 +46,107 @@ colorme() {
 }
 
 
-help() {
+error() {
+  echo "${RED}Error: $@${RESET}" 1>&2
+}
+
+
+usage() {
   printf "$BLUE"
   cat << EOF
 
-Usage: $0 [OPTIONS]
+Usage: $0 [-h | COMMAND] [OPTIONS]
 
-  -h, --help           Show this message
+  -h, --help               Show this message
+
+
+Commands:
+
+  install                  Install packages and symlink Zsh, Tmux and Neovim configurations
+
+    --skip-packages
+
+    --skip-zsh
+
+    --skip-tmux
+
+    --skip-nvim
+
+  uninstall                Remove all dotfile configurations
 
 EOF
   printf "$RESET"
 }
 
 
-error() {
-  echo "${RED}Error: $@${RESET}" 1>&2
+install() {
+  echo "Installing..."
+
+  local SKIP_PACKAGES=0
+  local SKIP_ZSH=0
+  local SKIP_TMUX=0
+  local SKIP_NVIM=0
+
+  for opt in $@; do
+    case $opt in
+
+      --skip-packages)  SKIP_PACKAGES=1;  ;;
+      --skip-zsh)       SKIP_ZSH=1;       ;;
+      --skip-tmux)      SKIP_TMUX=1;      ;;
+      --skip-nvim)      SKIP_NVIM=1;      ;;
+
+      *)
+        error "unknown option: $opt"
+        ;;
+
+    esac
+  done
+
+  if [ $SKIP_PACKAGES -ne 0 ]; then
+    echo "Skipping packages..."
+  fi
+  if [ $SKIP_ZSH -ne 0 ]; then
+    echo "Skipping Zsh..."
+  fi
+  if [ $SKIP_TMUX -ne 0 ]; then
+    echo "Skipping Tmux..."
+  fi
+  if [ $SKIP_NVIM -ne 0 ]; then
+    echo "Skipping Nvim..."
+  fi
+
+}
+
+uninstall() {
+  echo "Uninstalling..."
 }
 
 
 main() {
 
-  for opt in "$@"; do
-    case $opt in
+  case $1 in
 
-      --help)
-        help
-        ;;
+    -h|--help)
+      usage
+      ;;
 
-      *)
-        error "unknown option: $opt"
-        help
-        exit 1
-        ;;
+    install)
+      shift
+      install $@
+      ;;
 
-    esac
-  done
+    uninstall)
+      shift
+      uninstall
+      ;;
+
+    *)
+      error "unknown option: $1"
+      usage
+      exit 1
+      ;;
+
+  esac
 
   get_platform
   install_packer
