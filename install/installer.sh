@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 
+# TODO: Fix broken file paths
+
 . "$(pwd)/globals.sh"
 . "$(pwd)/colors.sh"
 . "$(pwd)/utils.sh"
