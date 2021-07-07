@@ -46,6 +46,8 @@ check_or_create_symlinks() {
         sudo ln -sf $(readlink -f $file) $symlink_dest
       fi
 
+      # TODO: Before and after check of link statuses
+
     fi
   done
 
