@@ -3,7 +3,13 @@
 
 # Non-configurable (Do not modify)
 PLATFORM=
+
 FORCE=0
+
+SKIP_PACKAGES=0
+SKIP_ZSH=0
+SKIP_TMUX=0
+SKIP_NVIM=0
 
 
 # Configurable

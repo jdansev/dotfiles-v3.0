@@ -7,12 +7,8 @@
 . "$(pwd)/nvim-installer.sh"
 
 
-install() {
-
-  local SKIP_PACKAGES=0
-  local SKIP_ZSH=0
-  local SKIP_TMUX=0
-  local SKIP_NVIM=0
+# sets the flags for any installations to be skipped
+check_skipped() {
 
   for opt in $@; do
     case $opt in
@@ -22,10 +18,7 @@ install() {
       --skip-tmux)      SKIP_TMUX=1;      ;;
       --skip-nvim)      SKIP_NVIM=1;      ;;
 
-      *)
-        error "unknown option: $opt"
-        ;;
-
+      *) error "unknown option: $opt";    ;;
     esac
   done
 
@@ -63,8 +56,33 @@ install() {
   fi
 
   [ $VERBOSE == 1 ] && printf "\n"
+}
+
+
+install() {
+
+  [ $SKIP_PACKAGES -ne 1 ] && {
+    [ $VERBOSE == 1 ] && echo "Installing packages"
+    # install packages
+  }
+
+  [ $SKIP_ZSH -ne 1 ] && {
+    [ $VERBOSE == 1 ] && echo "Installing Zsh"
+    # install zsh
+  }
+
+  [ $SKIP_TMUX -ne 1 ] && {
+    [ $VERBOSE == 1 ] && echo "Installing Tmux"
+    # install tmux
+  }
+
+  [ $SKIP_NVIM -ne 1 ] && {
+    [ $VERBOSE == 1 ] && echo "Installing Nvim"
+    # install nvim
+  }
 
 }
+
 
 uninstall() {
   echo "Uninstalling..."
@@ -83,7 +101,8 @@ main() {
 
     install)
       shift
-      install $@
+      check_skipped $@
+      install
       ;;
 
     uninstall)

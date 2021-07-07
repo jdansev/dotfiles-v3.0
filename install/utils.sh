@@ -27,30 +27,36 @@ error() {
 
 
 usage() {
-  printf "$BLUE"
+  HL=$BLUE
+  # NOH=$RESET
+  NOH=$BLUE
+
+  RESET=''
   cat << EOF
 
-Usage: $0 [-h | COMMAND] [OPTIONS]
+${NOH}Usage: $0 [-h | --help | COMMAND] [OPTIONS]
 
-  -h, --help               Show this message
+  ${HL}-h, --help${NOH}               Show this message
 
+  ${HL}-V, --verbose${NOH}            Print information to the console
 
 Commands:
 
-  install                  Install packages and symlink Zsh, Tmux and Neovim configurations
+  ${HL}symcheck${NOH}                 Lists the status of all dotfile symlinks
 
-    --skip-packages
+  ${HL}install${NOH}                  Install packages and symlink Zsh, Tmux and Neovim configurations
 
-    --skip-zsh
+    ${HL}--skip-packages${NOH}
 
-    --skip-tmux
+    ${HL}--skip-zsh${NOH}
 
-    --skip-nvim
+    ${HL}--skip-tmux${NOH}
 
-  uninstall                Remove all dotfile configurations
+    ${HL}--skip-nvim${NOH}
+
+  ${HL}uninstall${NOH}                Remove all dotfile configurations
 
 EOF
-  printf "$RESET"
 }
 
 
