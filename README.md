@@ -1,5 +1,5 @@
 <h1 align="center">⚬●⚬ Dotfiles v3.0 ⚬●⚬</h1>
-<p align="center">Personal dotfiles configurations /w installer for Linux packages, Zsh, Tmux and Neovim 0.5.x</p>
+<p align="center">Personal dotfile configurations /w installer for Linux packages, Zsh, Tmux and Neovim 0.5.x</p>
 
 # 📦 Installation
 ```bash
