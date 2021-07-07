@@ -8,15 +8,23 @@ sudo curl -sL https://bit.ly/36iiWm5 | bash
 
 # 🤖 Usage (commands)
 ```bash
+dotfiles -h
 dotfiles --help
+```
+```bash
+dotfiles symcheck
+```
+```bash
+dotfiles install
+dotfiles install --skip-packages --skip-zsh --skip-tmux --skip-nvim
+```
+```bash
+dotfiles uninstall
 ```
 
 # 📋 ToDo's
 **High Priority:**
-```bash
-dotfiles install
-dotfiles uninstall
-```
+
 
 **Low Priority:**
 - None  
