@@ -39,6 +39,9 @@ check_or_create_symlinks() {
 
       [ $VERBOSE == 1 ] && echo -e "\t${PURPLE}$(basename $file)${RESET} -> $symlink_dest: $symlink_status"
 
+
+      # TODO: Resolve overwriting existing directories with symlink
+
       if [ $SYM_CHECK_ONLY -ne 1 ]; then
         sudo ln -sf $(readlink -f $file) $symlink_dest
       fi
