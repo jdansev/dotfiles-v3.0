@@ -17,7 +17,7 @@ create_symlink() {
 }
 
 
-check_symlinks() {
+check_or_create_symlinks() {
   [ $VERBOSE == 1 ] && {
     tabs 2
     printf "\nSymlink status:\n\n"
@@ -38,6 +38,11 @@ check_symlinks() {
       fi
 
       [ $VERBOSE == 1 ] && echo -e "\t${PURPLE}$(basename $file)${RESET} -> $symlink_dest: $symlink_status"
+
+      if [ $SYM_CHECK_ONLY -ne 1 ]; then
+        sudo ln -sf $(readlink -f $file) $symlink_dest
+      fi
+
     fi
   done
 

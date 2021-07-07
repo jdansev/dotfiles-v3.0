@@ -55,7 +55,8 @@ install() {
 
   [ $SKIP_DOTFILES -ne 1 ] && {
     [ $VERBOSE == 1 ] && echo "Installing Zsh"
-    # install dotfiles
+    SYM_CHECK_ONLY=0
+    check_or_create_symlinks
   }
 
 }
@@ -77,7 +78,7 @@ main() {
       ;;
 
     symcheck)
-      check_symlinks
+      check_or_create_symlinks
       ;;
 
     install)
