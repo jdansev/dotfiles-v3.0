@@ -16,7 +16,7 @@ dotfiles symcheck
 ```
 ```bash
 dotfiles install
-dotfiles install --skip-packages --skip-zsh --skip-tmux --skip-nvim
+dotfiles install --skip-packages --skip-dotfiles
 ```
 ```bash
 dotfiles uninstall

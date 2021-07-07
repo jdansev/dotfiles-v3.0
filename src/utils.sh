@@ -48,11 +48,7 @@ Commands:
 
     ${HL}--skip-packages${NOH}
 
-    ${HL}--skip-zsh${NOH}
-
-    ${HL}--skip-tmux${NOH}
-
-    ${HL}--skip-nvim${NOH}
+    ${HL}--skip-dotfiles${NOH}
 
   ${HL}uninstall${NOH}                Remove all dotfile configurations
 

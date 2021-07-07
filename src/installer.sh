@@ -2,7 +2,6 @@
 
 
 SCRIPT_PATH=$(dirname $(readlink -f $0))
-echo $SCRIPT_PATH
 
 . "$SCRIPT_PATH/globals.sh"
 . "$SCRIPT_PATH/colors.sh"
@@ -18,9 +17,7 @@ check_skipped() {
     case $opt in
 
       --skip-packages)  SKIP_PACKAGES=1;  ;;
-      --skip-zsh)       SKIP_ZSH=1;       ;;
-      --skip-tmux)      SKIP_TMUX=1;      ;;
-      --skip-nvim)      SKIP_NVIM=1;      ;;
+      --skip-dotfiles)  SKIP_DOTFILES=1;  ;;
 
       *) error "unknown option: $opt";    ;;
     esac
@@ -38,25 +35,11 @@ check_skipped() {
     [ $VERBOSE == 1 ] && echo -e "\tPackages: $status_skipped"
   fi
 
-  # Zsh
-  if [ $SKIP_ZSH -ne 1 ]; then
-    [ $VERBOSE == 1 ] && echo -e "\tZsh: $status_installing"
+  # Dotfiles
+  if [ $SKIP_DOTFILES -ne 1 ]; then
+    [ $VERBOSE == 1 ] && echo -e "\tDotfiles: $status_installing"
   else
-    [ $VERBOSE == 1 ] && echo -e "\tZsh: $status_skipped"
-  fi
-
-  # Tmux
-  if [ $SKIP_TMUX -ne 1 ]; then
-    [ $VERBOSE == 1 ] && echo -e "\tTmux: $status_installing"
-  else
-    [ $VERBOSE == 1 ] && echo -e "\tTmux: $status_skipped"
-  fi
-
-  # Nvim
-  if [ $SKIP_NVIM -ne 1 ]; then
-    [ $VERBOSE == 1 ] && echo -e "\tNvim: $status_installing"
-  else
-    [ $VERBOSE == 1 ] && echo -e "\tNvim: $status_skipped"
+    [ $VERBOSE == 1 ] && echo -e "\tDotfiles: $status_skipped"
   fi
 
   [ $VERBOSE == 1 ] && printf "\n"
@@ -70,19 +53,9 @@ install() {
     # install packages
   }
 
-  [ $SKIP_ZSH -ne 1 ] && {
+  [ $SKIP_DOTFILES -ne 1 ] && {
     [ $VERBOSE == 1 ] && echo "Installing Zsh"
-    # install zsh
-  }
-
-  [ $SKIP_TMUX -ne 1 ] && {
-    [ $VERBOSE == 1 ] && echo "Installing Tmux"
-    # install tmux
-  }
-
-  [ $SKIP_NVIM -ne 1 ] && {
-    [ $VERBOSE == 1 ] && echo "Installing Nvim"
-    # install nvim
+    # install dotfiles
   }
 
 }
