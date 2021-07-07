@@ -4,6 +4,7 @@
 . "$(pwd)/globals.sh"
 . "$(pwd)/colors.sh"
 . "$(pwd)/utils.sh"
+. "$(pwd)/symlinker.sh"
 . "$(pwd)/nvim-installer.sh"
 
 
@@ -99,6 +100,10 @@ main() {
       usage
       ;;
 
+    symcheck)
+      check_symlinks
+      ;;
+
     install)
       shift
       check_skipped $@
@@ -123,5 +128,6 @@ main() {
 
 
 main "$@"
+exit 0
 
 

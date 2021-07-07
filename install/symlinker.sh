@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 
-. "$(pwd)/globals.sh"
 . "$(pwd)/symlinker-config.sh"
 
 
+# TODO: Unused
 create_symlink() {
   sym_src=$1
   sym_dest=$2
@@ -17,32 +17,32 @@ create_symlink() {
 }
 
 
-[ $VERBOSE == 1 ] && {
-  . "$(pwd)/colors.sh"
-  tabs 2
-  printf "\nSymlink status:\n\n"
+check_symlinks() {
+  [ $VERBOSE == 1 ] && {
+    . "$(pwd)/colors.sh"
+    tabs 2
+    printf "\nSymlink status:\n\n"
+  }
+
+  for file in ../*; do
+    if [ -v symlinks["$(basename $file)"] ]; then
+      symlink_dest=${symlinks["$(basename $file)"]}
+
+      if [ -L "$symlink_dest" ]; then
+        if [ -e "$symlink_dest" ]; then
+          symlink_status="${GREEN}GOOD${RESET}"
+        else
+          symlink_status="${RED}BROKEN${RESET}"
+        fi
+      else
+        symlink_status="${YELLOW}NONE${RESET}"
+      fi
+
+      [ $VERBOSE == 1 ] && echo -e "\t${PURPLE}$(basename $file)${RESET} -> $symlink_dest: $symlink_status"
+    fi
+  done
+
+  [ $VERBOSE == 1 ] && printf "\n"
 }
 
-for file in ../*; do
-  if [ -v symlinks["$(basename $file)"] ]; then
-    symlink_dest=${symlinks["$(basename $file)"]}
-
-    if [ -L "$symlink_dest" ]; then
-      if [ -e "$symlink_dest" ]; then
-        symlink_status="${GREEN}GOOD${RESET}"
-      else
-        symlink_status="${RED}BROKEN${RESET}"
-      fi
-    else
-      symlink_status="${YELLOW}NONE${RESET}"
-    fi
-
-    [ $VERBOSE == 1 ] && echo -e "\t${PURPLE}$(basename $file)${RESET} -> $symlink_dest: $symlink_status"
-  fi
-done
-
-[ $VERBOSE == 1 ] && printf "\n"
-
-
-exit 0
 
