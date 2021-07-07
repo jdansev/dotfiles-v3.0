@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-. "$(pwd)/symlinker-config.sh"
+. "$SCRIPT_PATH/symlinker-config.sh"
 
 
 # TODO: Unused
@@ -19,12 +19,11 @@ create_symlink() {
 
 check_symlinks() {
   [ $VERBOSE == 1 ] && {
-    . "$(pwd)/colors.sh"
     tabs 2
     printf "\nSymlink status:\n\n"
   }
 
-  for file in ../*; do
+  for file in $SCRIPT_PATH/../*; do
     if [ -v symlinks["$(basename $file)"] ]; then
       symlink_dest=${symlinks["$(basename $file)"]}
 

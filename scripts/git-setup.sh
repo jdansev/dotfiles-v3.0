@@ -2,7 +2,6 @@
 
 # https://github.com/colbycheeze/dotfiles/blob/master/setup/pre-setup.sh
 
-
 if [ -z "$SSH_AUTH_SOCK" ]; then
   echo "Status: no ssh-agent running."
 else

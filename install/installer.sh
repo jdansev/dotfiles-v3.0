@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
 
-# TODO: Fix broken file paths
+SCRIPT_PATH=$(dirname $(readlink -f $0))
+echo $SCRIPT_PATH
 
-. "$(pwd)/globals.sh"
-. "$(pwd)/colors.sh"
-. "$(pwd)/utils.sh"
-. "$(pwd)/symlinker.sh"
-. "$(pwd)/nvim-installer.sh"
+. "$SCRIPT_PATH/globals.sh"
+. "$SCRIPT_PATH/colors.sh"
+. "$SCRIPT_PATH/utils.sh"
+. "$SCRIPT_PATH/symlinker.sh"
+. "$SCRIPT_PATH/nvim-installer.sh"
 
 
 # sets the flags for any installations to be skipped
