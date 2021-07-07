@@ -99,7 +99,7 @@ main() {
 
   case $1 in
 
-    -h|--help)
+    ""|-h|--help)
       usage
       ;;
 
