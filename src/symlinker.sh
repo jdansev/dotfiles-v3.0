@@ -4,16 +4,21 @@
 . "$SCRIPT_PATH/symlinker-config.sh"
 
 
-# TODO: Unused
-create_symlink() {
-  sym_src=$1
-  sym_dest=$2
+print_symlink_status() {
+  file=$1
+  symlink_dest=$2
 
-  if [ $FORCE == 1 ]; then
-    [ $VERBOSE == 1 ] && echo "Force link for $sym_src"
+  if [ -L "$symlink_dest" ]; then
+    if [ -e "$symlink_dest" ]; then
+      symlink_status="${GREEN}GOOD${RESET}"
+    else
+      symlink_status="${RED}BROKEN${RESET}"
+    fi
   else
-    [ $VERBOSE == 1 ] && echo "Soft link for $sym_src"
+    symlink_status="${YELLOW}NONE${RESET}"
   fi
+
+  [ $VERBOSE == 1 ] && echo -e "\t${PURPLE}$(basename $file)${RESET} -> $symlink_dest: $symlink_status"
 }
 
 
@@ -25,25 +30,25 @@ check_or_create_symlinks() {
 
   for file in $SCRIPT_PATH/../*; do
     if [ -v symlinks["$(basename $file)"] ]; then
+
       symlink_dest=${symlinks["$(basename $file)"]}
+      print_symlink_status $file $symlink_dest
 
-      if [ -L "$symlink_dest" ]; then
-        if [ -e "$symlink_dest" ]; then
-          symlink_status="${GREEN}GOOD${RESET}"
-        else
-          symlink_status="${RED}BROKEN${RESET}"
-        fi
-      else
-        symlink_status="${YELLOW}NONE${RESET}"
-      fi
-
-      [ $VERBOSE == 1 ] && echo -e "\t${PURPLE}$(basename $file)${RESET} -> $symlink_dest: $symlink_status"
-
-
-      # TODO: Resolve overwriting existing directories with symlink
+      real_symlink_dest=$(readlink -f ${symlinks["$(basename $file)"]})
+      real_file=$(readlink -f $file)
 
       if [ $SYM_CHECK_ONLY -ne 1 ]; then
-        sudo ln -sf $(readlink -f $file) $symlink_dest
+        if [ -d "$symlink_dest" ]; then
+
+          target_path=$symlink_dest
+          # echo $target_path
+
+          # TODO: Resolve overwriting existing directories with symlink
+          # sudo ln -sf $(readlink -f $file) $symlink_dest
+
+        else
+          sudo ln -sf $file $symlink_dest
+        fi
       fi
 
       # TODO: Before and after check of link statuses
