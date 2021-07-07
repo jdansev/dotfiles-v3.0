@@ -3,7 +3,7 @@
 
 # 📦 Installation
 ```bash
-sudo curl -sL https://bit.ly/36iiWm5 | bash
+sudo curl -sL https://raw.githubusercontent.com/jdansev/dotfiles-v3.0/main/bootstrap.sh | bash
 ```
 
 # 🤖 Usage (commands)
