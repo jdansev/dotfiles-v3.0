@@ -11,8 +11,8 @@ fi
 
 git clone https://github.com/jdansev/dotfiles-v3.0.git $DOTFILES_PATH
 
-chmod +x $DOTFILES_PATH/install/installer.sh
-sudo ln -sf $DOTFILES_PATH/install/installer.sh $INSTALLER_PATH
+chmod +x $DOTFILES_PATH/src/installer.sh
+sudo ln -sf $DOTFILES_PATH/src/installer.sh $INSTALLER_PATH
 
 echo "Installed at $INSTALLER_PATH"
 
