@@ -1,86 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 
-get_platform() {
-  case "$(uname -s)" in
-    Linux*)  platform=Linux   ;;
-    Darwin*) platform=Darwin  ;;
-    CYGWIN*) platform=Cygwin  ;;
-    MINGW*)  platform=MinGw   ;;
-    *)       platform=Unknown ;;
-  esac
-}
-
-
-install_packer() {
-  if [ ! -d "$HOME/.local/share/nvim/site/pack/packer" ]; then
-    printf "Installing packer"
-    git clone https://github.com/wbthomason/packer.nvim \
-      ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-    printf "\npacker installed!\n"
-  fi
-}
-
-
-install_neovim_nightly() {
-  echo 'Installing neovim nightly builds from appimage...'
-
-  wget --quiet --directory-prefix=$HOME https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage
-  chmod +x $HOME/nvim.appimage
-  ./$HOME/nvim.appimage --appimage-extract
-  mv sqashfs-root $HOME/sqashfs-root
-
-  # TODO: Rename AppRun to nvim
-
-  sudo ln -sf $HOME/squashfs-root/AppRun /usr/local/bin/nvim
-}
-
-
-colorme() {
-  RED=$(printf '\033[31m')
-  GREEN=$(printf '\033[32m')
-  YELLOW=$(printf '\033[33m')
-  BLUE=$(printf '\033[34m')
-  BOLD=$(printf '\033[1m')
-  RESET=$(printf '\033[m')
-}
-
-
-error() {
-  echo "${RED}Error: $@${RESET}" 1>&2
-}
-
-
-usage() {
-  printf "$BLUE"
-  cat << EOF
-
-Usage: $0 [-h | COMMAND] [OPTIONS]
-
-  -h, --help               Show this message
-
-
-Commands:
-
-  install                  Install packages and symlink Zsh, Tmux and Neovim configurations
-
-    --skip-packages
-
-    --skip-zsh
-
-    --skip-tmux
-
-    --skip-nvim
-
-  uninstall                Remove all dotfile configurations
-
-EOF
-  printf "$RESET"
-}
+. "$(pwd)/globals.sh"
+. "$(pwd)/colors.sh"
+. "$(pwd)/utils.sh"
+. "$(pwd)/nvim-installer.sh"
 
 
 install() {
-  echo "Installing..."
 
   local SKIP_PACKAGES=0
   local SKIP_ZSH=0
@@ -102,18 +29,40 @@ install() {
     esac
   done
 
-  if [ $SKIP_PACKAGES -ne 0 ]; then
-    echo "Skipping packages..."
+  status_installing="${GREEN}INSTALLING${RESET}"
+  status_skipped="${YELLOW}SKIPPED${RESET}"
+
+  [ $VERBOSE == 1 ] && printf "\n"
+
+  # Packages
+  if [ $SKIP_PACKAGES -ne 1 ]; then
+    [ $VERBOSE == 1 ] && echo -e "\tPackages: $status_installing"
+  else
+    [ $VERBOSE == 1 ] && echo -e "\tPackages: $status_skipped"
   fi
-  if [ $SKIP_ZSH -ne 0 ]; then
-    echo "Skipping Zsh..."
+
+  # Zsh
+  if [ $SKIP_ZSH -ne 1 ]; then
+    [ $VERBOSE == 1 ] && echo -e "\tZsh: $status_installing"
+  else
+    [ $VERBOSE == 1 ] && echo -e "\tZsh: $status_skipped"
   fi
-  if [ $SKIP_TMUX -ne 0 ]; then
-    echo "Skipping Tmux..."
+
+  # Tmux
+  if [ $SKIP_TMUX -ne 1 ]; then
+    [ $VERBOSE == 1 ] && echo -e "\tTmux: $status_installing"
+  else
+    [ $VERBOSE == 1 ] && echo -e "\tTmux: $status_skipped"
   fi
-  if [ $SKIP_NVIM -ne 0 ]; then
-    echo "Skipping Nvim..."
+
+  # Nvim
+  if [ $SKIP_NVIM -ne 1 ]; then
+    [ $VERBOSE == 1 ] && echo -e "\tNvim: $status_installing"
+  else
+    [ $VERBOSE == 1 ] && echo -e "\tNvim: $status_skipped"
   fi
+
+  [ $VERBOSE == 1 ] && printf "\n"
 
 }
 
@@ -123,6 +72,8 @@ uninstall() {
 
 
 main() {
+  set_custom_tabs
+  detect_platform
 
   case $1 in
 
@@ -148,10 +99,10 @@ main() {
 
   esac
 
-  get_platform
-  install_packer
+  set_default_tabs
 }
 
-colorme
+
 main "$@"
+
 

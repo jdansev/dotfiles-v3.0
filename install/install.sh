@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 DOTFILES_DIR=new-dotfiles
 DOTFILES_PATH=$HOME/$DOTFILES_DIR
@@ -15,4 +15,5 @@ chmod +x $DOTFILES_PATH/install/installer.sh
 sudo ln -sf $DOTFILES_PATH/install/installer.sh $INSTALLER_PATH
 
 echo "Installed at $INSTALLER_PATH"
+
 
