@@ -31,7 +31,9 @@ check_or_create_symlinks() {
   for file in $SCRIPT_PATH/../*; do
     if [ -v symlinks["$(basename $file)"] ]; then
 
+      # incorrect path when using sudo on Debian
       symlink_dest=${symlinks["$(basename $file)"]}
+
       print_symlink_status $file $symlink_dest
 
       real_symlink_dest=$(readlink -f ${symlinks["$(basename $file)"]})
@@ -40,15 +42,24 @@ check_or_create_symlinks() {
       if [ $SYM_CHECK_ONLY -ne 1 ]; then
         if [ -d "$symlink_dest" ]; then
 
-          target_path=$symlink_dest
-          # echo $target_path
+          # move with temporary name
+          sudo ln -sf $real_file "${symlink_dest}.tmp"
 
-          # TODO: Resolve overwriting existing directories with symlink
-          # sudo ln -sf $(readlink -f $file) $symlink_dest
+          # remove the old backup if exists
+          if [ -d "${symlink_dest}.bak" ]; then
+            rm -rf "${symlink_dest}.bak"
+          fi
+
+          # overwrite with new backup
+          mv $symlink_dest "${symlink_dest}.bak"
+
+          # remove temporary name
+          mv "${symlink_dest}.tmp" $symlink_dest
 
         else
           sudo ln -sf $file $symlink_dest
         fi
+
       fi
 
       # TODO: Before and after check of link statuses
