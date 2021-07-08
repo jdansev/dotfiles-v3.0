@@ -1,18 +1,29 @@
 #!/usr/bin/env bash
 
-DOTFILES_DIR=.dotfiles
-DOTFILES_PATH=$HOME/$DOTFILES_DIR
-INSTALLER_BIN=dotfiles
-INSTALLER_PATH=/usr/local/sbin/$INSTALLER_BIN
 
-if [ -d "$DOTFILES_PATH" ]; then
-  rm -rf "$DOTFILES_PATH"
-fi
+GIT_REPO=https://github.com/jdansev/dotfiles-v3.0.git
+CLONE_PATH=$HOME/.dotfiles
 
-git clone https://github.com/jdansev/dotfiles-v3.0.git $DOTFILES_PATH
+BIN_NAME=dotfiles
+BIN_SRC_PATH=src/installer.sh
+BIN_INSTALL_PATH=/usr/local/sbin
 
-chmod +x $DOTFILES_PATH/src/installer.sh
-sudo ln -sf $DOTFILES_PATH/src/installer.sh $INSTALLER_PATH
+
+clone_repo() {
+  if [ -d "$CLONE_PATH" ]; then
+    rm -rf $CLONE_PATH
+  fi
+  git clone $GIT_REPO $CLONE_PATH
+}
+
+link_binary() {
+  sudo ln -sfn $CLONE_PATH/$BIN_SRC_PATH $BIN_INSTALL_PATH/$BIN_NAME
+  chmod +x $CLONE_PATH/$BIN_SRC_PATH
+}
+
+
+clone_repo
+link_binary
 
 echo "Installed at $INSTALLER_PATH"
 
