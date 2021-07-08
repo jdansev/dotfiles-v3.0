@@ -24,6 +24,6 @@ link_binary() {
 clone_repo
 link_binary
 
-echo "Installed at $BIN_INSTALL_PATH/$BIN_NAME"
+echo "\nInstalled at $BIN_INSTALL_PATH/$BIN_NAME\n"
 
 
