@@ -3,10 +3,8 @@
 
 install_packer() {
   if [ ! -d "$HOME/.local/share/nvim/site/pack/packer" ]; then
-    printf "Installing packer"
     git clone https://github.com/wbthomason/packer.nvim \
-      ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-    printf "\npacker installed!\n"
+      $HOME/.local/share/nvim/site/pack/packer/start/packer.nvim
   fi
 }
 

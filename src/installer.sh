@@ -7,7 +7,7 @@ SCRIPT_PATH=$(dirname $(readlink -f $0))
 . "$SCRIPT_PATH/colors.sh"
 . "$SCRIPT_PATH/utils.sh"
 . "$SCRIPT_PATH/symlinker.sh"
-. "$SCRIPT_PATH/nvim-installer.sh"
+. "$SCRIPT_PATH/install-nvim.sh"
 
 
 # sets the flags for any installations to be skipped
