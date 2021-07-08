@@ -3,8 +3,11 @@
 
 # Non-configurable (Do not modify)
 PLATFORM=
+
 FORCE=0
+BACKUPS='hard'      # soft | hard
 SYM_CHECK_ONLY=1
+
 SKIP_PACKAGES=0
 SKIP_DOTFILES=0
 

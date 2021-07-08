@@ -23,6 +23,7 @@ print_symlink_status() {
 
 
 check_or_create_symlinks() {
+
   [ $VERBOSE == 1 ] && {
     tabs 2
     printf "\nSymlink status:\n\n"
@@ -31,7 +32,7 @@ check_or_create_symlinks() {
   for file in $SCRIPT_PATH/../*; do
     if [ -v symlinks["$(basename $file)"] ]; then
 
-      # incorrect path when using sudo on Debian
+      # /root/ path when using sudo on Debian
       symlink_dest=${symlinks["$(basename $file)"]}
 
       print_symlink_status $file $symlink_dest
@@ -45,19 +46,27 @@ check_or_create_symlinks() {
           # move with temporary name
           sudo ln -sf $real_file "${symlink_dest}.tmp"
 
-          # remove the old backup if exists
-          if [ -d "${symlink_dest}.bak" ]; then
-            rm -rf "${symlink_dest}.bak"
-          fi
+          # replace the old backup if exists
+          if [ $BACKUPS == 'hard' ]; then
+            if [ -d "${symlink_dest}.bak" ]; then
+              rm -rf "${symlink_dest}.bak"
+            fi
+            mv $symlink_dest "${symlink_dest}.bak"
 
-          # overwrite with new backup
-          mv $symlink_dest "${symlink_dest}.bak"
+          # make a new backup only if no existing backups exist
+          elif [ $BACKUPS == 'soft' ]; then
+            if [ ! -e "${symlink_dest}.bak" ]; then
+              mv $symlink_dest "${symlink_dest}.bak"
+            fi
+            # delete the original
+            rm -rf $symlink_dest
+          fi
 
           # remove temporary name
           mv "${symlink_dest}.tmp" $symlink_dest
 
         else
-          sudo ln -sf $file $symlink_dest
+          sudo ln -sf $real_file $symlink_dest
         fi
 
       fi
