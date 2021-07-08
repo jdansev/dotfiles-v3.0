@@ -2,6 +2,7 @@
 
 
 GIT_REPO=https://github.com/jdansev/dotfiles-v3.0.git
+CLONE_OPTIONS="--quiet"
 CLONE_PATH=$HOME/.dotfiles
 
 BIN_NAME=dotfiles
@@ -10,10 +11,8 @@ BIN_INSTALL_PATH=/usr/local/sbin
 
 
 clone_repo() {
-  if [ -d "$CLONE_PATH" ]; then
-    rm -rf $CLONE_PATH
-  fi
-  git clone $GIT_REPO $CLONE_PATH
+  [ -d "$CLONE_PATH" ] && rm -rf $CLONE_PATH
+  git clone $CLONE_OPTIONS $GIT_REPO $CLONE_PATH
 }
 
 link_binary() {
@@ -25,6 +24,6 @@ link_binary() {
 clone_repo
 link_binary
 
-echo "Installed at $INSTALLER_PATH"
+echo "Installed at $BIN_INSTALL_PATH/$BIN_NAME"
 
 
