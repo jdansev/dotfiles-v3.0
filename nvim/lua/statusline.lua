@@ -198,11 +198,11 @@ gls.right[4] = {
     end,
     highlight = {
       colors.statusline_bg,
-      colors.red
+      colors.nord_blue
     },
     separator = ' ',
     separator_highlight = {
-      colors.red,
+      colors.nord_blue,
       colors.lightbg
     }
   }
@@ -228,7 +228,7 @@ gls.right[5] = {
       end
     end,
     highlight = {
-      colors.red,
+      colors.nord_blue,
       colors.lightbg,
     }
   }

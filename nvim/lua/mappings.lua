@@ -5,13 +5,13 @@ local map = require'utils/general'.map
 map('n', '<C-s>', '<cmd>w | echo "Buffer saved."<CR>', { silent = true })
 
 -- dotfiles search
-map('n', '<leader>config', '<cmd>lua require\'utils/telescope\'.search_dotfiles()<CR>', { silent = true })
-
--- TODO: reload neovim
--- map('n', '<leader><leader>', '<cmd>wa | so $MYVIMRC | echo "Reloaded" $MYVIMRC<CR>', { silent = true })
+map('n', '<leader>d', '<cmd>lua require\'utils/telescope\'.search_dotfiles()<CR>', { silent = true })
 
 -- choose colorscheme via Telescope
 map('n', '<leader>t', '<cmd>lua require\'telescope.builtin\'.colorscheme()<CR>', { silent = true })
+
+-- TODO: reload neovim
+-- map('n', '<leader><leader>', '<cmd>wa | so $MYVIMRC | echo "Reloaded" $MYVIMRC<CR>', { silent = true })
 
 -- remap normal mode escape
 map('i', 'jk', '<ESC>')
