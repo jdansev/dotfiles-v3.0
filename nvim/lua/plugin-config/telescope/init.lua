@@ -57,6 +57,24 @@ require'telescope'.setup{
           ['<C-w>'] = actions.close,
         }
       }
+    },
+    colorscheme = {
+      layout_config = {
+        width = 0.2
+      },
+      sort_lastused = true,
+      previewer = false,
+      prompt_title = false,
+      theme = 'dropdown',
+      mappings = {
+        i = {
+          ['<C-w>'] = actions.close,
+          ['<C-o>'] = actions.move_selection_next
+        },
+        n = {
+          ['<C-w>'] = actions.close,
+        }
+      }
     }
   }
 }

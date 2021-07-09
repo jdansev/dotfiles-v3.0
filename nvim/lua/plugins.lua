@@ -59,16 +59,17 @@ require'packer'.startup(function(use)
     end
   }
 
-  -- color schemes
-  use 'NLKNguyen/papercolor-theme'
-
   -- dashboard
   use 'glepnir/dashboard-nvim'
+
+  -- color schemes
+  use 'NLKNguyen/papercolor-theme'
 
   -- treesitter support
   use 'sainnhe/sonokai'
   use 'sainnhe/everforest'
   use 'mhartington/oceanic-next'
+  use 'shaunsingh/nord.nvim'
 
   -- dotfile utilities
   use 'tjdevries/astronauta.nvim'
