@@ -57,26 +57,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
   }
 }
 
--- emmet-ls
--- local lspconfig = require'lspconfig'
--- local configs = require'lspconfig/configs'
-
--- if not lspconfig.emmet_ls then
---   configs.emmet_ls = {
---     default_config = {
---       cmd = {'emmet-ls', '--stdio'};
---       filetypes = {'html', 'css'};
---       root_dir = function()
---         return vim.loop.cwd()
---       end;
---       settings = {};
---     };
---   }
--- end
--- lspconfig.emmet_ls.setup{
---   capabilities = capabilities;
--- }
-
 for _, server in pairs(servers) do
   require'lspconfig'[server].setup{
     capabilities = capabilities

@@ -49,12 +49,12 @@ check_skipped() {
 install() {
 
   [ $SKIP_PACKAGES -ne 1 ] && {
-    [ $VERBOSE == 1 ] && echo "Installing packages"
+    [ $VERBOSE == 1 ] && echo "Installing packages..."
     # install packages
   }
 
   [ $SKIP_DOTFILES -ne 1 ] && {
-    [ $VERBOSE == 1 ] && echo "Installing Zsh"
+    [ $VERBOSE == 1 ] && echo "Installing dotfiles..."
     SYM_CHECK_ONLY=0
     check_or_create_symlinks
   }

@@ -34,8 +34,6 @@ check_or_create_symlinks() {
       # /root/ path when using sudo on Debian
       symlink_dest=${symlinks["$(basename $file)"]}
 
-      print_symlink_status $file $symlink_dest
-
       real_symlink_dest=$(readlink -f ${symlinks["$(basename $file)"]})
       real_file=$(readlink -f $file)
 
@@ -70,7 +68,7 @@ check_or_create_symlinks() {
 
       fi
 
-      # TODO: Before and after check of link statuses
+      print_symlink_status $file $symlink_dest
 
     fi
   done
