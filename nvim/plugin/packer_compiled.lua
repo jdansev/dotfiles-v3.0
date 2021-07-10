@@ -198,6 +198,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jdansev/.local/share/nvim/site/pack/packer/start/splitjoin.vim"
   },
+  ["telescope-emoji.nvim"] = {
+    loaded = true,
+    path = "/home/jdansev/.local/share/nvim/site/pack/packer/start/telescope-emoji.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/jdansev/.local/share/nvim/site/pack/packer/start/telescope.nvim"

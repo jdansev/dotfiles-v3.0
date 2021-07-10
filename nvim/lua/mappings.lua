@@ -48,6 +48,9 @@ map('n', '<C-o>', '<cmd>lua require(\'telescope.builtin\').oldfiles()<CR>')
 map('n', '<C-M-f>', '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>')
 map('n', '<C-M-b>', '<cmd>lua require(\'telescope.builtin\').file_browser()<CR>')
 
+-- Telescope extensions
+map('n', '<leader>e', ':Telescope emoji search<CR>', { silent = true })
+
 -- barbar
 map('n', '<C-w>', '<cmd>BufferClose<CR>', { silent = true })
 map('n', '<C-S-Left>', '<cmd>BufferPrevious<CR>', { silent = true })

@@ -24,7 +24,6 @@ print_symlink_status() {
 
 check_or_create_symlinks() {
   [ $VERBOSE == 1 ] && {
-    tabs 2
     printf "\nSymlink status:\n\n"
   }
 
