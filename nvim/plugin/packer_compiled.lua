@@ -190,6 +190,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/jdansev/.local/share/nvim/site/pack/packer/start/popup.nvim"
   },
+  snap = {
+    loaded = true,
+    path = "/home/jdansev/.local/share/nvim/site/pack/packer/start/snap"
+  },
   sonokai = {
     loaded = true,
     path = "/home/jdansev/.local/share/nvim/site/pack/packer/start/sonokai"

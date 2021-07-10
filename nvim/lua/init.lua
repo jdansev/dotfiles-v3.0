@@ -12,6 +12,7 @@ require'plugin-config/nvim-tree'
 require'plugin-config/vim-vsnip'
 require'plugin-config/AutoSave'
 require'plugin-config/TrueZen'
+-- require'plugin-config/snap'
 
 
 if COMPLETION_ENGINE == 'coc' then

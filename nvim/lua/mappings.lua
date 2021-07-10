@@ -42,11 +42,15 @@ map('v', '>', '>gv', { noremap = true, silent = true })
 map('n', '<C-i>', ':set list!<cr>', { silent = true, noremap = true })
 
 -- Telescope
-map('n', '<C-f>', '<cmd>lua require(\'telescope.builtin\').current_buffer_fuzzy_find()<CR>')
-map('n', '<C-p>', '<cmd>lua require(\'telescope.builtin\').find_files()<CR>')
-map('n', '<C-o>', '<cmd>lua require(\'telescope.builtin\').oldfiles()<CR>')
 map('n', '<C-M-f>', '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>')
+map('n', '<C-p>', '<cmd>lua require(\'telescope.builtin\').find_files()<CR>')
+
+map('n', '<leader>f', '<cmd>lua require(\'telescope.builtin\').live_grep()<CR>')
+map('n', '<leader><leader>', '<cmd>lua require(\'telescope.builtin\').find_files()<CR>')
+
+map('n', '<C-o>', '<cmd>lua require(\'telescope.builtin\').oldfiles()<CR>')
 map('n', '<C-M-b>', '<cmd>lua require(\'telescope.builtin\').file_browser()<CR>')
+-- map('n', '<C-f>', '<cmd>lua require(\'telescope.builtin\').current_buffer_fuzzy_find()<CR>')
 
 -- Telescope extensions
 map('n', '<leader>e', ':Telescope emoji search<CR>', { silent = true })

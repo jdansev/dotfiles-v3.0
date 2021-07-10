@@ -40,10 +40,7 @@ require'packer'.startup(function(use)
   use 'Pocco81/TrueZen.nvim'
   use 'f-person/git-blame.nvim'
   use 'tpope/vim-commentary'
-
-  -- TODO: update with AutoSave.nvim
   use 'Pocco81/AutoSave.nvim'
-
   use 'AndrewRadev/splitjoin.vim'
   use 'nvim-treesitter/nvim-treesitter'
   use 'hrsh7th/vim-vsnip'
@@ -83,6 +80,7 @@ require'packer'.startup(function(use)
   use 'kosayoda/nvim-lightbulb'
   use 'onsails/lspkind-nvim'
 
+
   -- misc.
   -- use 'Pocco81/TrueZen.nvim'
   -- use 'folke/which-key.nvim'
@@ -91,6 +89,14 @@ require'packer'.startup(function(use)
   -- use 'djoshea/vim-autoread'
   -- use 'folke/zen-mode.nvim'
   -- use 'jabirali/tmux-tilish'
+  -- use 'camspiers/lens.vim'
+  -- use 'beauwilliams/focus.nvim'
+  -- use 'ggandor/lightspeed.nvim'
+  -- use 'camspiers/snap'
+  -- use 'winston0410/mark-radar.nvim'
+
+  -- use 'doums/lsp_spinner.nvim'
+  -- https://www.reddit.com/r/neovim/comments/o4bguk/i_share_a_little_plugin_that_display_the_name_of/
 
   -- TODO: install code formatter
   -- TODO: find newer commenting plugin

@@ -10,6 +10,28 @@ require'telescope'.setup{
     }
   },
   pickers = {
+    live_grep = {
+      vimgrep_arguments = {
+        'rg',
+        '--column',
+        '--line-number'
+      },
+      path_display = {
+        'tail'
+      },
+      layout_strategy = 'vertical',
+      layout_config = { width = 0.5 },
+      prompt_prefix = 'Find> ',
+      prompt_title = false,
+      mappings = {
+        i = {
+          ['<C-w>'] = actions.close,
+        },
+        n = {
+          ['<C-w>'] = actions.close,
+        }
+      }
+    },
     find_files = {
       layout_config = {
         width = 0.3
@@ -46,18 +68,22 @@ require'telescope'.setup{
         }
       }
     },
-    current_buffer_fuzzy_find = {
-      prompt_title = false,
-      previewer = false,
-      mappings = {
-        i = {
-          ['<C-w>'] = actions.close,
-        },
-        n = {
-          ['<C-w>'] = actions.close,
-        }
-      }
-    },
+
+    -- TODO: Refine this approach
+
+    -- current_buffer_fuzzy_find = {
+    --   prompt_title = false,
+    --   previewer = false,
+    --   mappings = {
+    --     i = {
+    --       ['<C-w>'] = actions.close,
+    --     },
+    --     n = {
+    --       ['<C-w>'] = actions.close,
+    --     }
+    --   }
+    -- },
+
     colorscheme = {
       layout_config = {
         width = 0.2
